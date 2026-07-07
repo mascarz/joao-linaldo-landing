@@ -22,9 +22,9 @@
         }
 
         :root {
-            --primary: #FF7A00;
-            --primary-dark: #E66F00;
-            --primary-light: #FF9500;
+            --primary: #D96600; /* Laranja mais escuro para melhor contraste */
+            --primary-dark: #BF5A00;
+            --primary-light: #FF7A00;
             --white: #FFFFFF;
             --gray-50: #F9FAFB;
             --gray-100: #F3F4F6;
@@ -32,7 +32,7 @@
             --gray-900: #111827;
             --dark-bg: #0a0a0a;
             --card-bg: rgba(255, 255, 255, 0.95);
-            --music-card-bg: #1a1a1a;
+            --music-card-bg: #f8f8f8;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -41,7 +41,7 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--dark-bg);
+            background: #FFFFFF;
             color: var(--gray-900);
             min-height: 100vh;
             line-height: 1.6;
@@ -51,49 +51,80 @@
             overflow-x: hidden;
         }
 
-        /* Background Pattern */
+        /* Background Pattern - Linhas Laranja */
         .background-pattern {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF7A00' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             z-index: 0;
+            overflow: hidden;
         }
 
-        .wave-bottom {
-            position: fixed;
-            bottom: 0;
+        /* Linhas Diagonais */
+        .background-pattern::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 20px,
+                rgba(255, 122, 0, 0.08) 20px,
+                rgba(255, 122, 0, 0.08) 22px
+            );
+            animation: slide-lines 20s linear infinite;
+        }
+
+        /* Linhas Horizontais */
+        .background-pattern::after {
+            content: '';
+            position: absolute;
+            top: 0;
             left: 0;
-            right: 0;
-            height: 200px;
+            width: 100%;
+            height: 100%;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 40px,
+                rgba(255, 122, 0, 0.05) 40px,
+                rgba(255, 122, 0, 0.05) 42px
+            );
+        }
+
+        @keyframes slide-lines {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        /* Ornamentos Laranja */
+        .ornament-top {
+            position: fixed;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(255, 122, 0, 0.4) 0%, rgba(255, 149, 0, 0.1) 100%);
+            border-radius: 50%;
+            filter: blur(60px);
             z-index: 0;
         }
 
-        .wave-bottom::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: -20%;
-            width: 140%;
-            height: 200px;
-            background: linear-gradient(135deg, rgba(255, 122, 0, 0.3) 0%, rgba(255, 149, 0, 0.15) 50%, transparent 100%);
-            border-radius: 100% 100% 0 0;
-            filter: blur(40px);
-        }
-
-        .wave-bottom::after {
-            content: '';
-            position: absolute;
-            bottom: -50px;
-            left: -10%;
-            width: 120%;
-            height: 150px;
-            background: linear-gradient(135deg, rgba(255, 122, 0, 0.5) 0%, rgba(255, 149, 0, 0.25) 100%);
-            border-radius: 100% 100% 0 0;
-            filter: blur(60px);
+        .ornament-bottom {
+            position: fixed;
+            bottom: -120px;
+            left: -120px;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(255, 149, 0, 0.3) 0%, rgba(255, 122, 0, 0.1) 100%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
         }
 
         .container {
@@ -166,7 +197,7 @@
             object-fit: cover;
             position: relative;
             z-index: 2;
-            border: 6px solid var(--dark-bg);
+            border: 4px solid #FF7A00;
         }
 
         .profile-glow {
@@ -221,12 +252,12 @@
         .card:nth-child(4) { animation-delay: 0.4s; }
 
         .card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 8px 30px rgba(255, 122, 0, 0.2);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(255, 122, 0, 0.25);
         }
 
         .card:active {
-            transform: translateY(-3px);
+            transform: translateY(-2px) scale(0.99);
         }
 
         .card-icon {
@@ -254,11 +285,11 @@
         }
 
         .card-description {
-            font-family: sans-serif;
-            font-size: 14px;
-            color: #6B7280;
-            font-weight: 500;
-        }
+                font-family: sans-serif;
+                font-size: 14px;
+                color: #4B5563; /* Cinza mais escuro para melhor contraste */
+                font-weight: 500;
+            }
 
         .card-arrow {
             font-size: 24px;
@@ -368,13 +399,13 @@
         .music-title {
             font-weight: 600;
             font-size: 16px;
-            color: var(--white);
+            color: var(--gray-900);
             margin-bottom: 2px;
         }
 
         .music-desc {
             font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
+            color: #4B5563; /* Cinza mais escuro para melhor contraste */
         }
 
         .music-play-btn {
@@ -698,6 +729,83 @@
             }
         }
 
+        /* Barra de Navegação Fixa */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-content {
+            max-width: 540px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--gray-900);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            margin-top: 80px;
+        }
+
+        /* Modal Sobre */
+        .about-modal-content {
+            text-align: center;
+        }
+
+        .about-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 16px;
+            border: 3px solid var(--primary);
+        }
+
+        .about-text {
+            text-align: left;
+            line-height: 1.8;
+            color: #4B5563;
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+
+
+
         @media (min-width: 768px) {
             .container {
                 max-width: 540px;
@@ -715,23 +823,38 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
+    <!-- Barra de Navegação -->
+    <nav class="navbar" aria-label="Barra de navegação principal">
+        <div class="navbar-content">
+            <div class="navbar-logo">
+                <span>🎵</span> João Linaldo
+            </div>
+            <ul class="nav-links">
+                <li><a class="nav-link" onclick="scrollToSection('hero')" aria-label="Ir para a seção inicial">Início</a></li>
+                <li><a class="nav-link" onclick="scrollToSection('music')" aria-label="Ir para a seção de músicas">Músicas</a></li>
+                <li><a class="nav-link" id="openAboutBtn" aria-label="Abrir modal sobre João Linaldo">Sobre</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="background-pattern"></div>
-    <div class="wave-bottom"></div>
+    <div class="ornament-top"></div>
+    <div class="ornament-bottom"></div>
     
     <div class="container">
-        <section class="hero-section">
+        <section class="hero-section" id="hero">
             <div class="profile-image-wrapper" id="profileWrapper">
                 <div class="profile-glow"></div>
-                <img src="Foto.jpeg" alt="João Linaldo" class="profile-image" loading="eager">
+                <img src="Foto.jpeg" alt="João Linaldo sorrindo" class="profile-image" loading="eager">
             </div>
             
             <div class="logo-section">
-                <img src="Logo.png" alt="João Linaldo" class="logo-image" loading="eager">
+                <img src="Logo.png" alt="Logo João Linaldo" class="logo-image" loading="eager">
             </div>
         </section>
 
         <section class="cards-section">
-            <a href="https://open.spotify.com/artist/2WwR2wQYpqJpSFAcsn1oyc?si=JK463LKHTz6xYdNqv5ks_Q&utm_source=copy-link" target="_blank" rel="noopener noreferrer" class="card">
+            <a href="https://open.spotify.com/artist/2WwR2wQYpqJpSFAcsn1oyc?si=JK463LKHTz6xYdNqv5ks_Q&utm_source=copy-link" target="_blank" rel="noopener noreferrer" class="card" aria-label="Abrir perfil do Spotify (abre em nova janela)">
                 <div class="card-icon icon-spotify">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="32" height="32">
                         <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.42-1.02.599-1.559.3z"/>
@@ -739,12 +862,12 @@
                 </div>
                 <div class="card-content">
                     <div class="card-title">Spotify</div>
-                    <div class="card-description">Ouça minhas músicas</div>
+    
                 </div>
                 <div class="card-arrow">→</div>
             </a>
 
-            <a href="https://www.instagram.com/joaolinaldocantor" target="_blank" rel="noopener noreferrer" class="card">
+            <a href="https://www.instagram.com/joaolinaldocantor" target="_blank" rel="noopener noreferrer" class="card" aria-label="Abrir perfil do Instagram (abre em nova janela)">
                 <div class="card-icon icon-instagram">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="32" height="32">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -757,7 +880,7 @@
                 <div class="card-arrow">→</div>
             </a>
 
-            <a href="https://wa.me/44991128083" target="_blank" rel="noopener noreferrer" class="card">
+            <a href="https://wa.me/44991128083" target="_blank" rel="noopener noreferrer" class="card" aria-label="Abrir chat do WhatsApp (abre em nova janela)">
                 <div class="card-icon icon-whatsapp">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="32" height="32">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -770,7 +893,7 @@
                 <div class="card-arrow">→</div>
             </a>
 
-            <div class="card" id="pixCard">
+            <div class="card" id="pixCard" role="button" tabindex="0" aria-label="Abrir modal de PIX para apoiar o trabalho">
                 <div class="card-icon icon-pix">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="32" height="32">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
@@ -784,7 +907,7 @@
             </div>
         </section>
 
-        <section class="music-section">
+        <section class="music-section" id="music">
             <div class="section-header">
                 <div class="section-divider"></div>
                 <span class="section-title-icon">🎵</span>
@@ -794,7 +917,7 @@
             </div>
             
             <div class="music-grid">
-                <a href="https://youtu.be/MzXegyh3JTM?is=cUnFHHcS1ytVTR9o" target="_blank" rel="noopener noreferrer" class="music-card">
+                <a href="https://youtu.be/MzXegyh3JTM?is=cUnFHHcS1ytVTR9o" target="_blank" rel="noopener noreferrer" class="music-card" aria-label="Assistir vídeo Sem Medo De Te Perder no YouTube (abre em nova janela)">
                     <div class="music-icon" style="background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
                             <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
@@ -808,7 +931,7 @@
                     <div class="music-play-btn">▶</div>
                 </a>
 
-                <a href="https://open.spotify.com/track/1536SARnCaC5zHFv6Z6ard?si=Sb6hhh2RQECx1eG_d1VWFA&utm_source=copy-link" target="_blank" rel="noopener noreferrer" class="music-card">
+                <a href="https://open.spotify.com/track/1536SARnCaC5zHFv6Z6ard?si=Sb6hhh2RQECx1eG_d1VWFA&utm_source=copy-link" target="_blank" rel="noopener noreferrer" class="music-card" aria-label="Ouvir música Sem Medo De Te Perder no Spotify (abre em nova janela)">
                     <div class="music-icon" style="background: linear-gradient(135deg, #1DB954 0%, #191414 100%);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
                             <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.42-1.02.599-1.559.3z"/>
@@ -822,7 +945,7 @@
                     <div class="music-play-btn">▶</div>
                 </a>
 
-                <a href="https://www.instagram.com/joaolinaldocantor" target="_blank" rel="noopener noreferrer" class="music-card">
+                <a href="https://www.instagram.com/joaolinaldocantor" target="_blank" rel="noopener noreferrer" class="music-card" aria-label="Assistir reel Sem Medo De Te Perder no Instagram (abre em nova janela)">
                     <div class="music-icon" style="background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F77737 100%);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -845,10 +968,10 @@
                 <p class="qr-subtitle">Escaneie para acessar diretamente</p>
                 <div id="qrcode"></div>
                 <div class="download-buttons">
-                    <button class="download-btn" id="downloadPng">
+                    <button class="download-btn" id="downloadPng" aria-label="Baixar QR Code em formato PNG">
                         ⬇️ Baixar QR Code (PNG)
                     </button>
-                    <button class="download-btn" id="downloadJpg">
+                    <button class="download-btn" id="downloadJpg" aria-label="Baixar QR Code em formato JPG">
                         ⬇️ Baixar QR Code (JPG)
                     </button>
                 </div>
@@ -865,6 +988,7 @@
         </footer>
     </div>
 
+    <!-- Modal PIX -->
     <div class="modal-overlay" id="pixModal">
         <div class="modal">
             <div class="modal-header">
@@ -882,6 +1006,26 @@
             <div class="success-message" id="successMessage">
                 <div class="success-icon">✅</div>
                 <div class="success-text">PIX copiado com sucesso.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Sobre -->
+    <div class="modal-overlay" id="aboutModal">
+        <div class="modal">
+            <div class="about-modal-content">
+                <img src="Foto.jpeg" alt="Foto de João Linaldo" class="about-photo">
+                <h3 class="modal-title">Sobre João Linaldo</h3>
+                <div class="about-text">
+                    <p>João Linaldo é um artista e cantor apaixonado por música, com foco em levar alegria e emoção através de suas canções.</p>
+                    <br>
+                    <p>Com uma carreira dedicada à música, ele busca conectar-se com o público através de performances autênticas e letras que tocam o coração.</p>
+                    <br>
+                    <p>Agradeço por todo o apoio e por fazerem parte dessa jornada musical! 🙏</p>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn-secondary" id="closeAboutBtn">Fechar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -906,6 +1050,41 @@
             }, 3000);
         }
 
+        // Função para rolar para uma seção
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+
+
+        // Modal Sobre
+        const openAboutBtn = document.getElementById('openAboutBtn');
+        const aboutModal = document.getElementById('aboutModal');
+        const closeAboutBtn = document.getElementById('closeAboutBtn');
+
+        if (openAboutBtn && aboutModal) {
+            openAboutBtn.addEventListener('click', () => {
+                aboutModal.classList.add('active');
+            });
+        }
+
+        if (closeAboutBtn && aboutModal) {
+            closeAboutBtn.addEventListener('click', () => {
+                aboutModal.classList.remove('active');
+            });
+        }
+
+        if (aboutModal) {
+            aboutModal.addEventListener('click', (e) => {
+                if (e.target === aboutModal) {
+                    aboutModal.classList.remove('active');
+                }
+            });
+        }
+
         // PIX Modal
         const pixCard = document.getElementById('pixCard');
         const pixModal = document.getElementById('pixModal');
@@ -915,9 +1094,18 @@
         const pixKey = document.getElementById('pixKey');
 
         if (pixCard && pixModal) {
+            // Clique do mouse
             pixCard.addEventListener('click', () => {
                 pixModal.classList.add('active');
                 successMessage.classList.remove('active');
+            });
+            // Suporte a teclado (Enter e Espaço)
+            pixCard.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    pixModal.classList.add('active');
+                    successMessage.classList.remove('active');
+                }
             });
         }
 
