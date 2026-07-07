@@ -1,0 +1,187 @@
+========================================
+📋 GUIA COMPLETO - DEPLOY DO SISTEMA
+========================================
+
+## PARTE 1: PREPARAR O GIT NO COMPUTADOR
+
+### 1. Verifique se o Git está instalado
+Abra o PowerShell ou Terminal e digite:
+```bash
+git --version
+```
+
+Se aparecer uma versão (ex: git version 2.40.0), está tudo ok!
+Se não, baixe em: https://git-scm.com/download/win
+
+### 2. Configurar o Git (apenas na primeira vez)
+```bash
+git config --global user.name "Seu Nome"
+git config --global user.email "seu-email@exemplo.com"
+```
+Use o mesmo email do GitHub!
+
+---
+
+## PARTE 2: CRIAR REPOSITÓRIO NO GITHUB
+
+### 1. Acesse github.com e faça login
+
+### 2. Clique em "New repository" (canto superior direito)
+
+### 3. Configure o repositório:
+- **Repository name**: `joao-linaldo-landing`
+- **Description**: Landing page do artista João Linaldo
+- Escolha **Public** ou **Private**
+- ⚠️ NÃO marque as opções (Add README, Add .gitignore, License)
+- Clique em **Create repository**
+
+---
+
+## PARTE 3: ENVIAR O CÓDIGO PARA O GITHUB
+
+Abra o PowerShell na pasta do projeto (a onde está o index.html)
+
+### Como abrir o PowerShell na pasta correta:
+1. Abra a pasta "Sistema Joao Linaldo"
+2. Clique na barra de endereço do Explorer
+3. Digite `powershell` e pressione Enter
+4. Ou segure Shift + Botão direito → "Abrir janela do PowerShell aqui"
+
+### Execute esses comandos um por um:
+
+```bash
+# 1. Inicializa o Git
+git init
+
+# 2. Adiciona todos os arquivos
+git add .
+
+# 3. Cria o primeiro commit
+git commit -m "Initial commit - Landing Page João Linaldo"
+
+# 4. Conecta ao repositório remoto
+# ⚠️ SUBSTITUA "SEU-USUARIO" PELO SEU USUÁRIO DO GITHUB!
+git remote add origin https://github.com/SEU-USUARIO/joao-linaldo-landing.git
+
+# 5. Envia para o GitHub
+git branch -M main
+git push -u origin main
+```
+
+Quando pedir login:
+- Use seu username do GitHub
+- Para senha, use um **Personal Access Token** (veja abaixo)
+
+---
+
+## PARTE 4: CRIAR PERSONAL ACCESS TOKEN (se necessário)
+
+### 1. No GitHub:
+- Clique na sua foto → Settings
+- Developer settings → Personal access tokens → Tokens (classic)
+- Generate new token → Generate new token (classic)
+- Nomeie: `Deploy Token`
+- Marque: `repo` (todas as opções de repo)
+- Clique em Generate token
+- **COPIE O TOKEN AGORA!** (você não verá mais)
+
+### 2. Quando fizer push:
+- Username: seu usuário do GitHub
+- Password: COLE O TOKEN GERADO
+
+---
+
+## PARTE 5: DEPLOY NO RENDER
+
+### 1. Acesse https://render.com
+- Crie uma conta (use GitHub para login, é mais fácil!)
+
+### 2. Clique em "New +" → "Static Site"
+
+### 3. Conecte sua conta do GitHub
+- Autorize o Render a acessar seus repositórios
+
+### 4. Selecione o repositório `joao-linaldo-landing`
+
+### 5. Configure o deploy:
+- **Name**: `joao-linaldo` (ou outro nome que quiser)
+- **Branch**: `main`
+- **Publish directory**: DEIXE VAZIO (importante!)
+- **Build command**: DEIXE VAZIO
+- **Environment**: Node (padrão)
+
+### 6. Clique em "Create Static Site"
+
+### 7. Aguarde...
+O Render fará o deploy automaticamente! Demora ~2 minutos.
+
+### 8. Pronto! 🎉
+Seu site estará online em:
+`https://joao-linaldo.onrender.com`
+
+---
+
+## PARTE 6: COMO ATUALIZAR O SITE
+
+Quando quiser mudar algo:
+1. Edite os arquivos no seu computador
+2. Abra o PowerShell na pasta
+3. Execute:
+
+```bash
+git add .
+git commit -m "Descrição da alteração"
+git push
+```
+
+O Render detecta a atualização automaticamente e atualiza o site em ~1 minuto!
+
+---
+
+## DICAS ÚTEIS
+
+### 🎯 Link do site personalizado (opcional)
+No Render, você pode adicionar um domínio próprio (ex: joaolinaldo.com.br)
+
+### 📱 Baixar QR Code
+- Acesse seu site
+- Clique em "Baixar QR Code (PNG)" para impressão
+- Imprima e cole na capinha do celular!
+
+### 🔐 Repositório privado ou público?
+- **Público**: Qualquer pessoa pode ver o código (recomendado, é só uma landing page)
+- **Privado**: Apenas você vê (mas o site continua público no Render)
+
+---
+
+## PROBLEMAS COMUNS E SOLUÇÕES
+
+### Problema 1: "git não é reconhecido"
+→ Instale o Git: https://git-scm.com/download/win
+
+### Problema 2: "Permission denied"
+→ Verifique o username e token do GitHub
+
+### Problema 3: Arquivos não aparecem no GitHub
+→ Verifique se executou `git add .` e `git push`
+
+---
+
+## LINKS ÚTEIS
+
+- GitHub: https://github.com
+- Render: https://render.com
+- Git Download: https://git-scm.com/download/win
+
+---
+
+## SUPORTE
+
+Se precisar de ajuda:
+1. Verifique os passos novamente
+2. Veja os logs no Render
+3. Ou peça ajuda! 🎵
+
+========================================
+🎵 BOA SORTE, JOÃO LINALDO! 🎵
+========================================

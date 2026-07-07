@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="João Linaldo - Cantor e Artista. Ouça minhas músicas, acompanhe meu trabalho e entre em contato.">
+    <meta name="keywords" content="João Linaldo, cantor, música, artista">
+    <meta name="author" content="João Linaldo">
+    <meta property="og:title" content="João Linaldo - Cantor e Artista">
+    <meta property="og:description" content="Ouça minhas músicas, acompanhe meu trabalho e entre em contato.">
+    <meta property="og:type" content="website">
+    <title>João Linaldo - Cantor e Artista</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF7A00;
+            --primary-dark: #E66F00;
+            --primary-light: #FF9500;
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-900: #111827;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --music-card-bg: #1a1a1a;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dark-bg);
+            color: var(--gray-900);
+            min-height: 100vh;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background Pattern */
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF7A00' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+        }
+
+        .wave-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            z-index: 0;
+        }
+
+        .wave-bottom::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -20%;
+            width: 140%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(255, 122, 0, 0.3) 0%, rgba(255, 149, 0, 0.15) 50%, transparent 100%);
+            border-radius: 100% 100% 0 0;
+            filter: blur(40px);
+        }
+
+        .wave-bottom::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -10%;
+            width: 120%;
+            height: 150px;
+            background: linear-gradient(135deg, rgba(255, 122, 0, 0.5) 0%, rgba(255, 149, 0, 0.25) 100%);
+            border-radius: 100% 100% 0 0;
+            filter: blur(60px);
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 32px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInZoom {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(255, 122, 0, 0.4), 0 0 60px rgba(255, 122, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 122, 0, 0.6), 0 0 80px rgba(255, 122, 0, 0.3);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 32px;
+            animation: fadeInZoom 0.8s ease-out;
+        }
+
+        .profile-image-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .profile-image {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            border: 6px solid var(--dark-bg);
+        }
+
+        .profile-glow {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF7A00 0%, #FF9500 50%, #FF7A00 100%);
+            z-index: 1;
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        .logo-section {
+            margin-bottom: 8px;
+        }
+
+        .logo-image {
+            width: 280px;
+            height: auto;
+            margin-top: 8px;
+        }
+
+        .cards-section {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 16px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            color: inherit;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+
+        .card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(255, 122, 0, 0.2);
+        }
+
+        .card:active {
+            transform: translateY(-3px);
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            font-size: 28px;
+        }
+
+        .card-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .card-title {
+            font-family: sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--gray-900);
+            margin-bottom: 2px;
+        }
+
+        .card-description {
+            font-family: sans-serif;
+            font-size: 14px;
+            color: #6B7280;
+            font-weight: 500;
+        }
+
+        .card-arrow {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-arrow {
+            transform: translateX(4px);
+        }
+
+        .icon-spotify {
+            background: linear-gradient(135deg, #1DB954 0%, #1AA34A 100%);
+        }
+
+        .icon-instagram {
+            background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F77737 100%);
+        }
+
+        .icon-whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+
+        .icon-pix {
+            background: linear-gradient(135deg, #00B4FF 0%, #0070BB 100%);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .section-divider {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .section-title-icon {
+            font-size: 20px;
+        }
+
+        .music-section {
+            margin-bottom: 32px;
+        }
+
+        .music-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .music-card {
+            background: var(--music-card-bg);
+            border-radius: 16px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+            animation: fadeInUp 0.6s ease-out both;
+            border: 1px solid rgba(255, 122, 0, 0.1);
+        }
+
+        .music-card:nth-child(1) { animation-delay: 0.6s; }
+        .music-card:nth-child(2) { animation-delay: 0.7s; }
+        .music-card:nth-child(3) { animation-delay: 0.8s; }
+
+        .music-card:hover {
+            transform: translateX(4px);
+            border-color: rgba(255, 122, 0, 0.4);
+            background: rgba(26, 26, 26, 0.95);
+        }
+
+        .music-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+        }
+
+        .music-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .music-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--white);
+            margin-bottom: 2px;
+        }
+
+        .music-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .music-play-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--white);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .music-card:hover .music-play-btn {
+            transform: scale(1.1);
+        }
+
+        /* QR Code Section */
+        .qr-section {
+            margin-bottom: 32px;
+            animation: fadeInUp 0.6s ease-out 0.9s both;
+        }
+
+        .qr-container {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 28px;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+        }
+
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .qr-title {
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .qr-subtitle {
+            font-size: 14px;
+            color: #6B7280;
+            margin-bottom: 20px;
+        }
+
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 122, 0, 0.4);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            animation: fadeInUp 0.6s ease-out 1s both;
+        }
+
+        .footer-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .footer-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .footer-text {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 32px 24px;
+            max-width: 360px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #00B4FF 0%, #0070BB 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 16px;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--gray-900);
+        }
+
+        .modal-pix-key {
+            background: var(--gray-100);
+            border: 2px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .pix-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .pix-key {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--gray-900);
+            word-break: break-all;
+        }
+
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 122, 0, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--gray-200);
+            color: var(--gray-900);
+            border: none;
+            border-radius: 16px;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-300);
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            margin-top: 16px;
+        }
+
+        .success-message.active {
+            display: block;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .success-icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .success-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: #10B981;
+        }
+
+        /* Toast Notification */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .toast {
+            background: var(--white);
+            color: var(--gray-900);
+            padding: 16px 24px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideInUp 0.3s ease-out;
+        }
+
+        .toast-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .toast.success .toast-icon {
+            color: #10B981;
+        }
+
+        .toast-text {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 122, 0, 0.2);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 540px;
+                padding: 48px 20px;
+            }
+
+            .profile-image {
+                width: 260px;
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <div class="background-pattern"></div>
+    <div class="wave-bottom"></div>
+    
+    <div class="container">
+        <section class="hero-section">
+            <div class="profile-image-wrapper" id="profileWrapper">
+                <div class="profile-glow"></div>
+                <img src="Foto.jpeg" alt="João Linaldo" class="profile-image" loading="eager">
+            </div>
+            
+            <div class="logo-section">
+                <img src="Logo.png" alt="João Linaldo" class="logo-image" loading="eager">
+            </div>
+        </section>
+
+        <section class="cards-section">
+            <a href="https://open.spotify.com/artist/2WwR2wQYpqJpSFAcsn1oyc?si=JK463LKHTz6xYdNqv5ks_Q&utm_source=copy-link" target="_blank" rel="noopener noreferrer" class="card">
+                <div class="card-icon icon-spotify">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="32" height="32">
+                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.42-1.02.599-1.559.3z"/>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Spotify</div>
+                    <div class="card-description">Ouça minhas músicas</div>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="https://www.instagram.com/joaolinaldocantor" target="_blank" rel="noopener noreferrer" class="card">
+                <div class="card-icon icon-instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="32" height="32">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Instagram</div>
+                    <div class="card-description">Acompanhe meu dia a dia</div>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="https://wa.me/44991128083" target="_blank" rel="noopener noreferrer" class="card">
+                <div class="card-icon icon-whatsapp">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="32" height="32">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">WhatsApp</div>
+                    <div class="card-description">Fale comigo</div>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <div class="card" id="pixCard">
+                <div class="card-icon icon-pix">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="32" height="32">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">PIX</div>
+                    <div class="card-description">Apoie meu trabalho</div>
+                </div>
+                <div class="card-arrow">→</div>
+            </div>
+        </section>
+
+        <section class="music-section">
+            <div class="section-header">
+                <div class="section-divider"></div>
+                <span class="section-title-icon">🎵</span>
+                <span class="section-title">OUÇA AGORA MINHA MÚSICA</span>
+                <span class="section-title-icon">🎵</span>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="music-grid">
+                <a href="https://youtu.be/MzXegyh3JTM?is=cUnFHHcS1ytVTR9o" target="_blank" rel="noopener noreferrer" class="music-card">
+                    <div class="music-icon" style="background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
+                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                        </svg>
+                    </div>
+                    <div class="music-info">
+                        <div class="music-title">YouTube</div>
+                        <div class="music-desc">Sem Medo De Te Perder</div>
+                        <div class="music-desc">Assista no YouTube</div>
+                    </div>
+                    <div class="music-play-btn">▶</div>
+                </a>
+
+                <a href="https://open.spotify.com/track/1536SARnCaC5zHFv6Z6ard?si=Sb6hhh2RQECx1eG_d1VWFA&utm_source=copy-link" target="_blank" rel="noopener noreferrer" class="music-card">
+                    <div class="music-icon" style="background: linear-gradient(135deg, #1DB954 0%, #191414 100%);">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
+                            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.42-1.02.599-1.559.3z"/>
+                        </svg>
+                    </div>
+                    <div class="music-info">
+                        <div class="music-title">Spotify</div>
+                        <div class="music-desc">Sem Medo De Te Perder</div>
+                        <div class="music-desc">Ouça no Spotify</div>
+                    </div>
+                    <div class="music-play-btn">▶</div>
+                </a>
+
+                <a href="https://www.instagram.com/joaolinaldocantor" target="_blank" rel="noopener noreferrer" class="music-card">
+                    <div class="music-icon" style="background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F77737 100%);">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </div>
+                    <div class="music-info">
+                        <div class="music-title">Instagram Reels</div>
+                        <div class="music-desc">Sem Medo De Te Perder</div>
+                        <div class="music-desc">Assista no Instagram</div>
+                    </div>
+                    <div class="music-play-btn">▶</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- QR Code Section -->
+        <section class="qr-section">
+            <div class="qr-container">
+                <h3 class="qr-title">QR Code da Página</h3>
+                <p class="qr-subtitle">Escaneie para acessar diretamente</p>
+                <div id="qrcode"></div>
+                <div class="download-buttons">
+                    <button class="download-btn" id="downloadPng">
+                        ⬇️ Baixar QR Code (PNG)
+                    </button>
+                    <button class="download-btn" id="downloadJpg">
+                        ⬇️ Baixar QR Code (JPG)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-divider">
+                <div class="footer-line"></div>
+                <span style="color: var(--primary); font-size: 20px;">❤️</span>
+                <div class="footer-line"></div>
+            </div>
+            <p class="footer-text">Obrigado pelo apoio!<br>Deus abençoe sempre! 🙏</p>
+        </footer>
+    </div>
+
+    <div class="modal-overlay" id="pixModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-icon">💰</div>
+                <h3 class="modal-title">Apoie meu trabalho</h3>
+            </div>
+            <div class="modal-pix-key">
+                <p class="pix-label">Chave PIX</p>
+                <p class="pix-key" id="pixKey">44991128083</p>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-primary" id="copyBtn">Copiar Chave PIX</button>
+                <button class="btn-secondary" id="closeBtn">Fechar</button>
+            </div>
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">✅</div>
+                <div class="success-text">PIX copiado com sucesso.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toast Notification
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <span class="toast-icon">✅</span>
+                <span class="toast-text">${message}</span>
+            `;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideInUp 0.3s ease-out reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // PIX Modal
+        const pixCard = document.getElementById('pixCard');
+        const pixModal = document.getElementById('pixModal');
+        const closeBtn = document.getElementById('closeBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const successMessage = document.getElementById('successMessage');
+        const pixKey = document.getElementById('pixKey');
+
+        if (pixCard && pixModal) {
+            pixCard.addEventListener('click', () => {
+                pixModal.classList.add('active');
+                successMessage.classList.remove('active');
+            });
+        }
+
+        if (closeBtn && pixModal) {
+            closeBtn.addEventListener('click', () => {
+                pixModal.classList.remove('active');
+            });
+        }
+
+        if (pixModal) {
+            pixModal.addEventListener('click', (e) => {
+                if (e.target === pixModal) {
+                    pixModal.classList.remove('active');
+                }
+            });
+        }
+
+        if (copyBtn) {
+            copyBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(pixKey.textContent);
+                    successMessage.classList.add('active');
+                    showToast('Chave PIX copiada com sucesso!');
+                    setTimeout(() => {
+                        pixModal.classList.remove('active');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Erro ao copiar:', err);
+                    showToast('Erro ao copiar chave PIX');
+                }
+            });
+        }
+
+        // Easter Egg - Click on profile
+        const profileWrapper = document.getElementById('profileWrapper');
+        if (profileWrapper) {
+            profileWrapper.addEventListener('click', () => {
+                showToast('Obrigado por acessar! 🎵');
+            });
+        }
+
+        // Ripple Effect
+        function createRipple(event) {
+            const card = event.currentTarget;
+            const ripple = document.createElement('span');
+            const rect = card.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            ripple.classList.add('ripple');
+            
+            card.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+
+        document.querySelectorAll('.card, .music-card').forEach(card => {
+            card.addEventListener('click', createRipple);
+        });
+
+        // QR Code Generation
+        const qrcodeDiv = document.getElementById('qrcode');
+        if (qrcodeDiv && typeof QRCode !== 'undefined') {
+            const qrCodeUrl = window.location.href;
+            const qr = new QRCode(qrcodeDiv, {
+                text: qrCodeUrl,
+                width: 180,
+                height: 180,
+                colorDark: '#111827',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            // Download QR Code
+            function downloadQRCode(format) {
+                const canvas = qrcodeDiv.querySelector('canvas');
+                if (canvas) {
+                    let dataUrl;
+                    if (format === 'jpg') {
+                        const tempCanvas = document.createElement('canvas');
+                        tempCanvas.width = canvas.width;
+                        tempCanvas.height = canvas.height;
+                        const ctx = tempCanvas.getContext('2d');
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+                        ctx.drawImage(canvas, 0, 0);
+                        dataUrl = tempCanvas.toDataURL('image/jpeg', 0.9);
+                    } else {
+                        dataUrl = canvas.toDataURL('image/png');
+                    }
+                    
+                    const link = document.createElement('a');
+                    link.download = `qrcode-joao-linaldo.${format}`;
+                    link.href = dataUrl;
+                    link.click();
+                    showToast(`QR Code baixado com sucesso!`);
+                }
+            }
+
+            document.getElementById('downloadPng').addEventListener('click', () => downloadQRCode('png'));
+            document.getElementById('downloadJpg').addEventListener('click', () => downloadQRCode('jpg'));
+        }
+    </script>
+</body>
+</html>
